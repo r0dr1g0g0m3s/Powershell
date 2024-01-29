@@ -1,0 +1,30 @@
+################################################################### 4ºSCRIPT ###############################################################################
+#Parametros, variáves e argumentos
+param($ip)
+if (!$ip) {
+    echo "É necessário digitar o endereço Ip"
+    echo "Modo de uso: .\script.ps1 192.168.0.1"
+} else {
+echo "Efetuando ping no host: $ip"
+ping -n 1 $ip | Select-String "bytes=32"
+
+
+################################################################### 3ºSCRIPT ###############################################################################
+#Ping na variável
+$ip = Read-host "Digite o IP"
+$porta = "80"
+echo "Efetuando ping no host: $ip na porta $porta"
+ping -n 1 $ip | Select-String "bytes=32"
+
+
+################################################################### 2ºSCRIPT ###############################################################################
+
+#script 2
+$ip = "192.168.0.1"
+echo "Varrendo o host $ip"
+
+
+################################################################### 1ºSCRIPT ###############################################################################
+#Meu primeiro script no powershell!
+echo "Meu diretório atual: $(pwd)"
+echo "Estou logado como: $(whoami)"
