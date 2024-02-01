@@ -1,4 +1,5 @@
 o###################################################### Condições, repetições e sequências ###################################################
+#Sexto script (Utilizando operadores lógicos)
 
 $idade = Read-Host "Qual a idade?
 if ($idade -ge "18") {
@@ -6,6 +7,25 @@ if ($idade -ge "18") {
 } else{ 
   echo "Não pode dirigir"
 }
+#obs: Os operadores são aritméticos, lógicos e relacionais.
+_____________________________________________________________________________________________________________________________________________
+
+#Sétimo script (Utilizando foreach)
+#Exemplo: foreach ($var1 in 1..10) {echo "192.168.0.$var1"}
+#O resultado seria imprimir 192.168.0.1 até o 10, ficando endereço ip um abaixo do outro.
+
+param ($p1)
+if (!$p1) {
+  echo "Exemplo para funcionar: .\script.ps1 192.168.0.10"
+} else{
+foreach ($p2 in 1..10){
+ping -n 1 $p1 | Select-String "bytes=32"
+}
+}
+#param é usado para declarar parâmetros em scripts ou funções PowerShell. Os parâmetros são valores que podem ser passados para um script
+# ou função quando são chamados.
+#foreach é usado para iterar por uma coleção de itens, como uma matriz (array) ou uma lista. 
+
 
 ###################################################### Condições, repetições e sequências ###################################################
 
