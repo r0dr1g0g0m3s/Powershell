@@ -1,4 +1,4 @@
-############################################### Condições, repetições e sequências ############################################
+###################################################### Condições, repetições e sequências ###################################################
 
 $idade = Read-Host "Qual a idade?
 if ($idade -ge "18") {
@@ -7,15 +7,43 @@ if ($idade -ge "18") {
   echo "Não pode dirigir"
 }
 
-############################################### Condições, repetições e sequências ############################################
+###################################################### Condições, repetições e sequências ###################################################
 
 #Primeiro Script (variáveis de ambiente - pwd, whoami, date etc)
 echo "Meu diretório atual: $(pwd)"
 Write-Host "Meu usuário atual: $(whoami)"
+_____________________________________________________________________________________________________________________________________________
 
-#Segundo script 
+#Segundo script (requisitando inserção de um parametro $ip)
+$ip = Read-Host "Digite o IP"
+echo "Efetuando ping no host: $ip"
+ping -n 1 $ip
+_____________________________________________________________________________________________________________________________________________
+
+#Terceiro script (filtrando o resultado com Select-String)
 $ip = Read-Host "Digite o IP"
 echo "Efetuando ping no host: $ip"
 ping -n 1 $ip | Select-String "bytes=32"
 #obs: Sempre quando o ping encontra o destino, no meio do log de resposta, vem bytes=32. Logo, vamos filtrar pra mostrar somente as linhas
 #que tem "bytes=32".
+_____________________________________________________________________________________________________________________________________________
+
+#Quarto script (requisitando inserção de varios parametros $ip, $port, $path etc)
+param ($ip, $port)
+echo "Efetuando ping no host: $ip"
+ping -n 1 $ip | Select-String "bytes=32"
+#Para executar este script, deverá seguir o exemplo: .\script.ps1 192.168.0.15 8080
+_____________________________________________________________________________________________________________________________________________
+
+#Quinto script (requisitando inserção de varios parametros $ip, $port, $path etc)
+param ($ip)
+if (!$ip) {
+  echo "Você deve executar esse script conforme exemplo: .\script.ps1 192.168.0.10
+} else{
+  echo "Efetuando ping no host: $ip"
+ping -n 1 $ip | Select-String "bytes=32"
+}
+#Para executar este script, deverá seguir o exemplo: .\script.ps1 192.168.0.15 8080
+
+
+
