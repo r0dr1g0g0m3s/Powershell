@@ -1,4 +1,4 @@
-###################################################### Condições, repetições e sequências ###################################################
+o###################################################### Condições, repetições e sequências ###################################################
 
 $idade = Read-Host "Qual a idade?
 if ($idade -ge "18") {
@@ -38,7 +38,7 @@ ________________________________________________________________________________
 #Quinto script (requisitando inserção de varios parametros $ip, $port, $path etc)
 param ($ip)
 if (!$ip) {
-  echo "Você deve executar esse script conforme exemplo: .\script.ps1 192.168.0.10
+  echo "Exemplo para funcionar: .\script.ps1 192.168.0.10"
 } else{
   echo "Efetuando ping no host: $ip"
 ping -n 1 $ip | Select-String "bytes=32"
