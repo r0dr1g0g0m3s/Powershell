@@ -1,42 +1,21 @@
+############################################### Condições, repetições e sequências ############################################
 
-################################################################### 5ºSCRIPT ###############################################################################
-param ($ip)
-if (!$ip){
-    echo "VocÊ errou. 
-    echo "O corretor é .\script.ps1 192.168.0"
-}else {
-foreach ($var1 in 1..254) {ping -n 1 $ip.$var1:80}
+$idade = Read-Host "Qual a idade?
+if ($idade -ge "18") {
+  echo "Pode dirigir"
+} else{ 
+  echo "Não pode dirigir"
+}
 
-################################################################### 4ºSCRIPT ###############################################################################
+############################################### Condições, repetições e sequências ############################################
 
-#Parametros, variáves e argumentos
-param($ip)
-if (!$ip) {
-    echo "É necessário digitar o endereço Ip"
-    echo "Modo de uso: .\script.ps1 192.168.0.1"
-} else {
+#Primeiro Script (variáveis de ambiente - pwd, whoami, date etc)
+echo "Meu diretório atual: $(pwd)"
+Write-Host "Meu usuário atual: $(whoami)"
+
+#Segundo script 
+$ip = Read-Host "Digite o IP"
 echo "Efetuando ping no host: $ip"
 ping -n 1 $ip | Select-String "bytes=32"
-
-
-################################################################### 3ºSCRIPT ###############################################################################
-
-#Ping na variável
-$ip = Read-host "Digite o IP"
-$porta = "80"
-echo "Efetuando ping no host: $ip na porta $porta"
-ping -n 1 $ip | Select-String "bytes=32"
-
-
-################################################################### 2ºSCRIPT ###############################################################################
-
-#script 2
-$ip = "192.168.0.1"
-echo "Varrendo o host $ip"
-
-
-################################################################### 1ºSCRIPT ###############################################################################
-
-#Meu primeiro script no powershell!
-echo "Meu diretório atual: $(pwd)"
-echo "Estou logado como: $(whoami)"
+#obs: Sempre quando o ping encontra o destino, no meio do log de resposta, vem bytes=32. Logo, vamos filtrar pra mostrar somente as linhas
+#que tem "bytes=32".
