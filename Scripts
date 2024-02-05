@@ -72,7 +72,7 @@ ping -n 1 $p1 | Select-String "bytes=32"
 
 _____________________________________________________________________________________________________________________________________________
 
-#Oitavo script (Utilizando foreach)
+#Oitavo script (
 #Exemplo: foreach ($var1 in 1..10) {echo "192.168.0.$var1"}
 #O resultado seria imprimir 192.168.0.1 até o 10, ficando endereço ip um abaixo do outro.
 
@@ -92,15 +92,34 @@ $resp.Line.split(' ')[2] -replace ":",""
 
 _____________________________________________________________________________________________________________________________________________
 
-#Nono script (Portscan)
-param ($ip)
-if (!$ip) {
-  echo "Exemplo para funcionar: .\script.ps1 192.168.0.10"
-} else{
-try {foreacsr-NetConnection $ip-port $porta -WarningAction SilentlyContinue -InformationLevel Quiet)
-    echo "Porta $porta Aberta"
-}} else {
-    echo "Porta $porta Fechada"
-}} catch {}
-}
+#Nono script ( Port scan limitado a um ip e ao range de portas dentro do script)
 
+
+param ($ip)
+if (!$ip) { #Pode utilizar -not ou ! para dizer que caso não seja digitado o ip, faça imprima na tela echo...
+    Write-Host "Exemplo de uso: .\script.ps1 -ip 192.168.0.10"
+} else {
+$portas = 21,22,3306,80,443 # Define um range de portas (80 .. 100, por exemplo)
+foreach ($porta in $portas) {
+if (Test-NetConnection $ip -Port $porta -WarningAction SilentlyContinue -InformationLevel Quiet) {
+    Write-Host "Porta $porta Aberta"
+} else {
+   Write-Host "Porta $porta Fechada"
+}
+}
+}
+_____________________________________________________________________________________________________________________________________________
+
+#Nono script ( Port scan - limitado a um ip e a uma porta)
+
+param ($int, $porta)
+if (-not $ip -or -not $porta) {
+    echo "Exemplo de uso: .\script.ps1 -ip 192.168.0.10 -porta 80"
+} else {
+    try {
+        $resultadoTeste = Test-NetConnection -ComputerName $ip -Port $porta -WarningAction Stop
+        echo "Porta $porta Aberta"
+    } catch {
+        echo "Porta $porta Fechada"
+    }
+}
