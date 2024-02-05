@@ -1,37 +1,14 @@
-o###################################################### Condições, repetições e sequências ###################################################
-#Sexto script (Utilizando operadores lógicos)
-
-$idade = Read-Host "Qual a idade?
-if ($idade -ge "18") {
-  echo "Pode dirigir"
-} else{ 
-  echo "Não pode dirigir"
-}
-#obs: Os operadores são aritméticos, lógicos e relacionais.
-_____________________________________________________________________________________________________________________________________________
-
-#Sétimo script (Utilizando foreach)
-#Exemplo: foreach ($var1 in 1..10) {echo "192.168.0.$var1"}
-#O resultado seria imprimir 192.168.0.1 até o 10, ficando endereço ip um abaixo do outro.
-
-param ($p1)
-if (!$p1) {
-  echo "Exemplo para funcionar: .\script.ps1 192.168.0.10"
-} else{
-foreach ($p2 in 1..10){
-ping -n 1 $p1 | Select-String "bytes=32"
-}
-}
-#param é usado para declarar parâmetros em scripts ou funções PowerShell. Os parâmetros são valores que podem ser passados para um script
-# ou função quando são chamados.
-#foreach é usado para iterar por uma coleção de itens, como uma matriz (array) ou uma lista. 
-
-
 ###################################################### Condições, repetições e sequências ###################################################
 
 #Primeiro Script (variáveis de ambiente - pwd, whoami, date etc)
 echo "Meu diretório atual: $(pwd)"
 Write-Host "Meu usuário atual: $(whoami)"
+
+#salve esse scrip com name.psi
+#get-comand é utilizado para listar todos os comando do powershell
+#select-string é o grep do powershell: get-comando | Select-string "Flush-volume "
+#get-help mostra as funcionalidades de um comenado: get-hel test-netconnection
+
 _____________________________________________________________________________________________________________________________________________
 
 #Segundo script (requisitando inserção de um parametro $ip)
@@ -65,5 +42,65 @@ ping -n 1 $ip | Select-String "bytes=32"
 }
 #Para executar este script, deverá seguir o exemplo: .\script.ps1 192.168.0.15 8080
 
+o###################################################### Condições, repetições e sequências ###################################################
+#Sexto script (Utilizando operadores lógicos)
 
+$idade = Read-Host "Qual a idade?
+if ($idade -ge "18") {
+  echo "Pode dirigir"
+} else{ 
+  echo "Não pode dirigir"
+}
+#obs: Os operadores são aritméticos, lógicos e relacionais.
+_____________________________________________________________________________________________________________________________________________
+
+#Sétimo script (Utilizando foreach)
+#Exemplo: foreach ($var1 in 1..10) {echo "192.168.0.$var1"}
+#O resultado seria imprimir 192.168.0.1 até o 10, ficando endereço ip um abaixo do outro.
+
+param ($p1)
+if (!$p1) {
+  echo "Exemplo para funcionar: .\script.ps1 192.168.0.10"
+} else{
+foreach ($p2 in 1..10){
+ping -n 1 $p1 | Select-String "bytes=32"
+}
+}
+#param é usado para declarar parâmetros em scripts ou funções PowerShell. Os parâmetros são valores que podem ser passados para um script
+# ou função quando são chamados.
+#foreach é usado para iterar por uma coleção de itens, como uma matriz (array) ou uma lista. 
+
+_____________________________________________________________________________________________________________________________________________
+
+#Oitavo script (Utilizando foreach)
+#Exemplo: foreach ($var1 in 1..10) {echo "192.168.0.$var1"}
+#O resultado seria imprimir 192.168.0.1 até o 10, ficando endereço ip um abaixo do outro.
+
+param ($p1)
+if (!$p1) {
+  echo "Exemplo para funcionar: .\script.ps1 192.168.0.10"
+} else{
+foreach ($p2 in 1..10){
+$try {resp = ping -n 1 $p1 | Select-String "bytes=32"
+$resp.Line.split(' ')[2] -replace ":",""
+} catch {}
+}
+}
+
+#Utilizando o resp.line.splica para filtrar os resultados, assim como se utiliza o cut no bash.
+#O try e o catché para tratar os erros que aparecem
+
+_____________________________________________________________________________________________________________________________________________
+
+#Nono script (Portscan)
+param ($ip)
+if (!$ip) {
+  echo "Exemplo para funcionar: .\script.ps1 192.168.0.10"
+} else{
+try {foreacsr-NetConnection $ip-port $porta -WarningAction SilentlyContinue -InformationLevel Quiet)
+    echo "Porta $porta Aberta"
+}} else {
+    echo "Porta $porta Fechada"
+}} catch {}
+}
 
