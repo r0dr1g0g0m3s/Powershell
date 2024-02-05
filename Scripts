@@ -110,7 +110,7 @@ if (Test-NetConnection $ip -Port $porta -WarningAction SilentlyContinue -Informa
 }
 _____________________________________________________________________________________________________________________________________________
 
-#Nono script ( Port scan - limitado a um ip e a uma porta)
+#Décimo script ( Port scan - limitado a um ip e a uma porta)
 
 param ($int, $porta)
 if (-not $ip -or -not $porta) {
@@ -123,3 +123,33 @@ if (-not $ip -or -not $porta) {
         echo "Porta $porta Fechada"
     }
 }
+
+_____________________________________________________________________________________________________________________________________________
+
+#Décimo primeiro script ( Parsing site)
+
+#Décimo primeiro script ( Parsing site)
+
+$site = Read-Host "Digite o site"
+$web = Invoke-WebRequest -uri "$site" -Method Options
+echo "O servidor roda: "
+$web.headers.server
+echo " "
+echo "O servidor aceita os métodos: "
+$web.headers.allow
+echo "Links encontrados: "
+$web2 = Invoke-WebRequest -uri "$site"
+$web2.links.href | Select-String http://
+
+
+#O servidor roda: Apache/2.2.22 (Debian)
+#O servidor aceita os métodos: GET,HEAD,POST,OPTIONS
+#inks encontrados: 
+#http://37.59.174.233:8080
+#http://intranet.businesscorp.com.br
+#http://mail.businesscorp.com.br
+#http://parsingok.businesscorp.com.br
+#http://srvkey.businesscorp.com.br
+#http://rh.businesscorp.com.br
+#http://www.styleshout.com/
+
